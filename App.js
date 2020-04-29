@@ -1,20 +1,23 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Authentication from './src/screens/security/authentication';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import Router from './src/router/router';
+import { Provider } from 'react-redux';
+import store from './src/redux/store/store';
+
+console.disableYellowBox = true;
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Authentication/>
-    </View>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <Router />
+      </SafeAreaView>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
