@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
+import Profile from '../profile/profile';
 
 class Home extends Component {
 
@@ -38,6 +39,6 @@ const MusicRoute = () => <Text>Music</Text>;
 
 const AlbumsRoute = () => <Text>Albums</Text>;
 
-const RecentsRoute = () => <Text>Recents</Text>;
+const RecentsRoute = () => <Profile/>;
 
 export default Home;
