@@ -13,7 +13,7 @@ class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            phoneNumber: '',
+            phone_number: '',
             password: '',
             boolNext: false,
             signInText: 'Next'
@@ -21,12 +21,29 @@ class SignIn extends Component {
         this._handleLogin = this._handleLogin.bind(this);
     }
 
+    static getDerivedStateFromProps(nextProps, state) {
+        if(nextProps.auth.isAuthenticated) {
+            Actions.home();
+        }
+
+        if(nextProps.auth.user === '400 Not Found') {
+            state.boolNext=false;
+        } else {
+            return null;
+        }
+    }
+
     _handleLogin() {
-        this.props.loginUser();
+        const { phone_number, password } = this.state;
+        const data = {
+            phone_number: "+"+phone_number,
+            password: password
+        }
+        this.props.loginUser(data);
     }
 
     render() {
-        const { boolNext, signInText, phoneNumber, password } = this.state;
+        const { boolNext, signInText, phone_number, password } = this.state;
 
         return (
             <KeyboardAwareScrollView style={styles.container}>
@@ -64,12 +81,13 @@ class SignIn extends Component {
                         <View>
                             <TextInput
                                 label='Enter Phone Number'
-                                value={phoneNumber}
+                                value={phone_number}
                                 keyboardType='number-pad'
                                 selectionColor='#00aced'
                                 underlineColor='#00aced'
                                 placeholderTextColor='#00aced'
-                                onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                                placeholder='eg: 94123467890'
+                                onChangeText={phone_number => this.setState({ phone_number })}
                             />
                             <View style={{ margin: 5 }}></View>
                             <Button
