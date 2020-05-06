@@ -10,7 +10,7 @@ export const loginUser = (data) => dispatch => {
     }
 
     axios
-        .post(`${keys.auth}/v1/signin`, data, headers)
+        .post(`${keys.url}/v1/signin`, data, headers)
         .then(res => {
             AsyncStorage.clear();
             AsyncStorage.setItem('user', res.data);
