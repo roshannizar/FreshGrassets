@@ -20,7 +20,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Appbar.Header style={{ backgroundColor: 'whitesmoke' }}>
                     <Appbar.Content title='Profile' />
                     <Appbar.Action icon='logout' onPress={this._handleLogout} />
@@ -42,4 +42,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { logoutUser })(Profile);
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
 });
