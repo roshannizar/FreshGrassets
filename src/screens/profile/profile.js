@@ -21,7 +21,7 @@ class Profile extends Component {
     render() {
         return (
             <View>
-                <Appbar.Header style={{ backgroundColor: '#00aced' }}>
+                <Appbar.Header style={{ backgroundColor: 'whitesmoke' }}>
                     <Appbar.Content title='Profile' />
                     <Appbar.Action icon='logout' onPress={this._handleLogout} />
                 </Appbar.Header>
