@@ -7,6 +7,7 @@ import { Appbar, Chip } from 'react-native-paper';
 import Spinner from '../../shared/spinner/spinner';
 import ProductComponent from '../../components/productComponent/productComponent';
 import common from '../../shared/common/common';
+import { Actions } from 'react-native-router-flux';
 
 class Products extends Component {
 
@@ -60,7 +61,7 @@ class Products extends Component {
             <View style={styles.container}>
                 <Appbar.Header style={{ backgroundColor: 'whitesmoke' }}>
                     <Appbar.Content title='Fresh Grassets' />
-                    <Appbar.Action icon='cart' />
+                    <Appbar.Action icon='cart' onPress={() => Actions.cart()}/>
                 </Appbar.Header>
                 <View style={{ flex: 1 }}>
                     {this.renderProducts()}
