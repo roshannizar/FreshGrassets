@@ -3,6 +3,7 @@ import { Router, Scene } from 'react-native-router-flux';
 import SignIn from '../screens/security/signin';
 import Authentication from '../screens/security/authentication';
 import Home from '../screens/home/home';
+import Cart from '../screens/cart/cart';
 
 const Routes = () => (
     <Router>
@@ -20,10 +21,16 @@ const Routes = () => (
                 title='Sign In'
             />
             <Scene
-            type='reset'
+                type='reset'
                 key='home'
                 component={Home}
                 title='Home'
+                hideNavBar={true}
+            />
+            <Scene
+                key="cart"
+                component={Cart}
+                title='Your Cart'
                 hideNavBar={true}
             />
         </Scene>
