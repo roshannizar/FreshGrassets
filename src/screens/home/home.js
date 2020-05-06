@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 import Profile from '../profile/profile';
+import Product from '../product/product';
+import Activity from '../activity/activity';
+import Search from '../search/search';
 
 class Home extends Component {
 
@@ -9,7 +12,7 @@ class Home extends Component {
         routes: [
             { key: 'home', title: 'Home', icon: 'home' },
             { key: 'search', title: 'Search', icon: 'magnify' },
-            { key: 'cart', title: 'Cart', icon: 'cart' },
+            { key: 'activity', title: 'Activity', icon: 'poll' },
             { key: 'profile', title: 'Profile', icon: 'account' }
         ],
     };
@@ -17,16 +20,16 @@ class Home extends Component {
     _handleIndexChange = index => this.setState({ index });
 
     _renderScene = BottomNavigation.SceneMap({
-        home: MusicRoute,
-        search: AlbumsRoute,
-        cart: RecentsRoute,
-        profile: RecentsRoute
+        home: ProductsRoute,
+        search: SearchRoute,
+        activity: ActivityRoute,
+        profile: ProfileRoute
     });
 
     render() {
         return (
             <BottomNavigation
-                barStyle={{ backgroundColor: '#00aced' }}
+                barStyle={{ backgroundColor: 'whitesmoke' }}
                 navigationState={this.state}
                 onIndexChange={this._handleIndexChange}
                 renderScene={this._renderScene}
@@ -35,10 +38,12 @@ class Home extends Component {
     }
 }
 
-const MusicRoute = () => <Text>Music</Text>;
+const ProductsRoute = () => <Product />;
 
-const AlbumsRoute = () => <Text>Albums</Text>;
+const SearchRoute = () => <Search />;
 
-const RecentsRoute = () => <Profile/>;
+const ActivityRoute = () => <Activity />;
+
+const ProfileRoute = () => <Profile />;
 
 export default Home;
