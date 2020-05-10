@@ -4,21 +4,9 @@ import { Button } from 'material-bread';
 import Grocery from '../../../assets/grocery.png'
 import { AnimatedBackgroundColorView } from 'react-native-animated-background-color-view';
 import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { logoutUser } from '../../redux/actions/authActions';
 
 class Authentication extends Component {
 
-    constructor() {
-        super();
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            Actions.home();
-        }
-    }
 
     render() {
         return (
@@ -53,16 +41,7 @@ class Authentication extends Component {
     }
 }
 
-Authentication.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-export default connect(mapStateToProps, { logoutUser })(Authentication);
+export default Authentication;
 
 const styles = StyleSheet.create({
     container: {
