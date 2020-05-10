@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, AsyncStorage } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button, Divider, TextInput } from 'react-native-paper';
 
@@ -12,6 +12,7 @@ class ProductDetailComponent extends Component {
             totalAmount: 0
         }
         this._handleCalculation = this._handleCalculation.bind(this);
+        this._handleAddToCart = this._handleAddToCart.bind(this);
     }
 
     _handleCalculation(value) {
@@ -27,9 +28,39 @@ class ProductDetailComponent extends Component {
         else {
             this.setState({
                 totalAmount: 0,
-                quantity:0
+                quantity: 0
             });
             alert("You have exceed available quantity!");
+        }
+    }
+
+    async _handleAddToCart() {
+        const { product } = this.props;
+        
+        try {
+            var order = await AsyncStorage.getItem('order');
+
+            if(order != null) {
+                var orderTemp = [];
+                var i;
+                orderTemp.push(order);
+                console.log(order);
+                for(i=0;i<order.length;i++) {
+                    console.log(order[i]);
+                }
+
+                orderTemp.push(product);
+                await AsyncStorage.setItem('order',JSON.stringify(orderTemp));
+            } else {
+                var orderTemp = [];
+                orderTemp.push(JSON.parse(product));
+                await AsyncStorage.setItem('order',JSON.stringify(orderTemp));
+            }
+            //AsyncStorage.removeItem('order');
+            console.log(order);
+        }
+        catch(error) {
+            console.log(error);
         }
     }
 
@@ -70,7 +101,7 @@ class ProductDetailComponent extends Component {
                     </View>
                 </View>
                 <View style={{ margin: 10 }}>
-                    <Button color='whitesmoke' style={{ backgroundColor: 'green' }}>ADD TO CART</Button>
+                    <Button color='whitesmoke' style={{ backgroundColor: 'green' }} onPress={this._handleAddToCart}>ADD TO CART</Button>
                 </View>
             </View>
 
