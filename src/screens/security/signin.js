@@ -17,7 +17,8 @@ class SignIn extends Component {
             password: '',
             boolNext: false,
             signInText: 'Next',
-            error: false
+            error: false,
+            loading:false
         }
         this._handleLogin = this._handleLogin.bind(this);
     }
@@ -41,11 +42,15 @@ class SignIn extends Component {
             phone_number: "+" + phone_number,
             password: password
         }
+        this.setState({
+            loading:true,
+            signInText: 'Signing you in'
+        })
         this.props.loginUser(data);
     }
 
     render() {
-        const { boolNext, signInText, phone_number, password, error } = this.state;
+        const { boolNext, signInText, phone_number, password, error, loading } = this.state;
 
         return (
             <KeyboardAwareScrollView style={styles.container}>
@@ -72,6 +77,7 @@ class SignIn extends Component {
                             <Button
                                 mode="contained"
                                 color='#00aced'
+                                loading={loading}
                                 onPress={this._handleLogin}>
                                 {signInText}
                             </Button>
